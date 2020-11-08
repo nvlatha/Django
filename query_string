@@ -1,0 +1,24 @@
+# code for the lesson "understanding query strings"
+# section 2: lecture 9
+
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+
+@app.route('/index')
+@app.route('/')
+def hello_flask():
+    return 'Hello Flask'
+
+
+@app.route('/new/')
+def query_string(greeting='hello'):
+    query_val = request.args.get('greeting', greeting)
+    return '<h1> the greeting is: {0} </h1>'.format(query_val)
+
+
+@app.route('/user')
+@app.route('/user/<name>')
+def no_query_strings(name='mina'):
+    return '<h1> hello there ! {} </h1>'.format(name)
